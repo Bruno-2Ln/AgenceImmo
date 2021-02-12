@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid mx-5">
+        <a class="navbar-brand" href="#">Agence Immo</a>
+        <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+        &#9776;
+        </button>
+        <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-auto">
+                <li class="nav-item">
+                <a class="nav-link" aria-current="page" (click)="isMenuCollapsed = true" href="#">Accueil</a>
+                </li>
+                <li class="nav-item dropdown" ngbDropdown>
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" ngbDropdownToggle>
+                       Administration
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="navbarDropdown">
+                        <li><a ngbDropdownItem class="dropdown-item" (click)="isMenuCollapsed = true" href="#">Tableau de bord</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a ngbDropdownItem class="dropdown-item text-danger" (click)="isMenuCollapsed = true" href="#">Déconnexion</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

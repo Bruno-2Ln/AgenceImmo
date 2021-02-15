@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -11,14 +11,19 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 export class AdminPropertiesComponent implements OnInit {
 
+  propertiesForm: FormGroup;
+
   constructor(
-    config: NgbModalConfig, private modalService: NgbModal
+    config: NgbModalConfig, 
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
   ngOnInit(): void {
+    this.initPropertiesForm();
   }
 
   // Ouverture Modal
@@ -26,11 +31,27 @@ export class AdminPropertiesComponent implements OnInit {
     this.modalService.open(content);
   }
 
-  onSubmitPropertiesForm(form: NgForm){
-    // console.log(form.value);
-    const title = form.value['title'];
-    console.log(title);
-    
+  initPropertiesForm() {
+    this.propertiesForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      category: ['', Validators.required],
+      surface: ['', Validators.required],
+      rooms: ['', Validators.required],
+      description: '',
+      price: ['', Validators.required],
+    });
   }
+
+  onSubmitPropertiesForm(){
+    console.log(this.propertiesForm.value)
+  }
+
+  // Formulaire méthode template
+  // onSubmitPropertiesForm(form: NgForm){
+  //   // console.log(form.value);
+  //   const title = form.value['title'];
+  //   console.log(title);
+    
+  // }
 
 }

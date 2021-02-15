@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
+import { PropertiesService } from 'src/app/services/properties.service';
 
 @Component({
   selector: 'app-admin-properties',
@@ -12,11 +14,15 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 export class AdminPropertiesComponent implements OnInit {
 
   propertiesForm: FormGroup;
+  propertiesSubcription: Subscription;
+  properties: any[] = [];
+  indexSuppression: number;
 
   constructor(
     config: NgbModalConfig, 
     private modalService: NgbModal,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private propertiesService: PropertiesService,
   ) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -24,6 +30,12 @@ export class AdminPropertiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.initPropertiesForm();
+    this.propertiesService.propertiesSubject.subscribe(
+      (properties) => {
+        this.properties = properties
+      }
+      );
+      this.propertiesService.emitProperties();
   }
 
   // Ouverture Modal
@@ -43,8 +55,29 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   onSubmitPropertiesForm(){
-    console.log(this.propertiesForm.value)
+    const newProperty = this.propertiesForm.value;
+    this.propertiesService.createProperty(newProperty);
+    console.log(this.properties);
+
   }
+
+  //les champs du formulaire sont réinitialisés
+  resetForm(){
+    this.propertiesForm.reset();
+  }
+
+  onDeleteProperty(){
+      this.propertiesService.deleteProperty(this.indexSuppression);
+  }
+
+  //récupération de l'index pour le donner à la modal de confirmation
+  recupIndex(index){
+    this.indexSuppression = index;
+  }
+
+  // indexP(index){
+  //   console.log(this.properties[index].title);
+  // }
 
   // Formulaire méthode template
   // onSubmitPropertiesForm(form: NgForm){

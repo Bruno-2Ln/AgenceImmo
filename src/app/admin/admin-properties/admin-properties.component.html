@@ -2,11 +2,27 @@
     <div class="row">
         <div class="col-12 d-flex">
             <h2 class="font-weight-light"><i class="fas fa-home"></i> Biens immobiliers</h2>
-            <button class="btn btn-primary ml-auto" type="button" (click)="open(propertiesFormModal)"><i class="fas fa-plus"></i> Ajouter un bien</button>
+            <button class="btn btn-primary ml-auto" type="button" (click)="open(propertiesFormModal);resetForm()"><i class="fas fa-plus"></i> Ajouter un bien</button>
         </div>
     </div>
     <hr class="mt-1 mb-5 bg-dark">
-    <div class="row"></div>
+    <div class="row">
+        <div *ngFor="let property of properties; let i = index" class="col-12 shadow-sm p-4 mb-3 bg-light">
+            <div class="d-flex">
+                <h3 class="font-weight-normal">{{ property.title }}</h3>
+                <div class="ml-auto">
+                    <button type="button" class="btn btn-primary m-1" title="modifier le bien"> <i class="fas fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger m-1" title="effacer le bien" (click)="recupIndex(i);open(confirmDeleteProperty)"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+            <p *ngIf="property.price && property.price !== ''">
+                {{ property.price}} €
+            </p>
+            <p>
+                {{ property.category}} <span *ngIf="property.surface && property.surface !== ''">de {{ property.surface}} m²</span><span *ngIf="property.rooms && property.rooms !== ''">, {{ property.surface }} pièce(s).</span>
+            </p>
+        </div>
+    </div>
 </div>
 
 <!-- Modal -->
@@ -53,3 +69,19 @@
         </form>
     </div>
 </ng-template>
+
+<!-- Modal Confirm Suppression -->
+
+ <ng-template #confirmDeleteProperty let-c="close" let-d="dismiss">
+    <div class="modal-content">
+        <div class="modal-body">
+
+            <p>Souhaitez-vous supprimer ce bien ?</p>
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="d('Cross click')">Annuler</button>
+                <button type="button" class="btn btn-primary" (click)="onDeleteProperty();d('Cross click')">Confirmer</button>
+            </div>
+
+    </div>
+</ng-template> 

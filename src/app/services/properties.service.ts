@@ -11,12 +11,16 @@ export class PropertiesService {
     {
       title: "Maison dans écrin de verdure",
       category: "maison",
+      price: "250 000",
+      rooms: "5",
+      surface: "150",
       sold: true
     },
     {
       title: "Appartement au bord de la mer",
       category: "appartement",
-      sold: false
+      sold: false,
+      surface: "56"
     }, {
       title: "Villa d'architecte",
       category: "maison",
@@ -27,6 +31,18 @@ export class PropertiesService {
   propertiesSubject = new Subject<any[]>();
 
   constructor() { }
+
+
+createProperty(property) {
+  this.properties.push(property);
+  this.emitProperties;
+}
+
+deleteProperty(index){
+  this.properties.splice(index, 1);
+  this.emitProperties;
+}
+
 
   //on emet les données à chaque modification de données.
   emitProperties() {

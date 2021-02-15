@@ -11,18 +11,45 @@
 
 <ng-template #propertiesFormModal let-c="close" let-d="dismiss">
     <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="propertiesFomrModalTitle">Edition d'un bien</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            ...
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="d('Cross click')">Annuler</button>
-            <button type="button" class="btn btn-primary" (click)="c('Save click')">Enregistrer</button>
-        </div>
+        <form>
+            <div class="modal-header">
+                <h5 class="modal-title" id="propertiesFomrModalTitle">Edition d'un bien</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" placeholder="Titre" class="form-control">
+                </div>
+                <!-- custom select -->
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="inputGroupSelect01">Catégories</label>
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Choisir...</option>
+                        <option value="appartement">Appartement</option>
+                        <option value="maison">Maison</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <input type="text" placeholder="Surface (m²)" class="form-control">
+                    </div>
+                    <div class="form-group col-6">
+                        <input type="number" placeholder="Nombre de pièces" class="form-control">
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <textarea name="" id="" rows="4" class="form-control w-100" placeholder="Description du bien"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Prix">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="d('Cross click')">Annuler</button>
+                <button type="button" class="btn btn-primary" (click)="c('Save click')">Enregistrer</button>
+            </div>
+        </form>
     </div>
 </ng-template>

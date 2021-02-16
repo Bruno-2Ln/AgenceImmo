@@ -1,39 +1,19 @@
-import { resolve } from '@angular/compiler-cli/src/ngtsc/file_system';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
+import { Property } from '../interfaces/property';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropertiesService {
 
-  properties = [
-    {
-      title: "Maison dans écrin de verdure",
-      category: "maison",
-      price: "250 000",
-      rooms: "5",
-      surface: "150",
-      sold: true
-    },
-    {
-      title: "Appartement au bord de la mer",
-      category: "appartement",
-      sold: false,
-      surface: "56"
-    }, {
-      title: "Villa d'architecte",
-      category: "maison",
-      sold: false
-    }
-  ];
-
-  propertiesSubject = new Subject<any[]>();
+  properties: Property[];
+  propertiesSubject = new Subject<Property[]>();
 
   constructor() { }
 
 
-createProperty(property) {
+createProperty(property: Property) {
   this.properties.push(property);
   this.emitProperties;
 }
@@ -43,7 +23,7 @@ deleteProperty(index){
   this.emitProperties;
 }
 
-updateProperty(property, index) {
+updateProperty(property: Property, index) {
   this.properties[index] = property;
   console.log(property);
   this.emitProperties;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { Property } from 'src/app/interfaces/property';
 import { PropertiesService } from 'src/app/services/properties.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class AdminPropertiesComponent implements OnInit {
 
   propertiesForm: FormGroup;
   propertiesSubcription: Subscription;
-  properties: any[] = [];
+  properties: Property[] = [];
 
   indexSuppression: number;
 
@@ -35,7 +36,7 @@ export class AdminPropertiesComponent implements OnInit {
   ngOnInit(): void {
     this.initPropertiesForm();
     this.propertiesService.propertiesSubject.subscribe(
-      (properties) => {
+      (properties: Property[]) => {
         this.properties = properties
       }
       );
@@ -60,7 +61,7 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   onSubmitPropertiesForm(){
-    const newProperty = this.propertiesForm.value;
+    const newProperty: Property = this.propertiesForm.value;
     if (this.editMode){
       this.propertiesService.updateProperty(newProperty, this.indextoUpdate);
       console.log(newProperty);
@@ -85,7 +86,7 @@ export class AdminPropertiesComponent implements OnInit {
     this.indexSuppression = index;
   }
 
-  onEditProperty(property, content){
+  onEditProperty(property: Property, content){
     this.open(content);
     this.editMode = true;
     this.propertiesForm.get('title').setValue(property.title);

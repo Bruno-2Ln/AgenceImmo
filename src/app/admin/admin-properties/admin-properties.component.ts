@@ -16,7 +16,11 @@ export class AdminPropertiesComponent implements OnInit {
   propertiesForm: FormGroup;
   propertiesSubcription: Subscription;
   properties: any[] = [];
+
   indexSuppression: number;
+
+  indextoUpdate: number;
+  editMode: boolean = false;
 
   constructor(
     config: NgbModalConfig, 
@@ -51,19 +55,25 @@ export class AdminPropertiesComponent implements OnInit {
       rooms: ['', Validators.required],
       description: '',
       price: ['', Validators.required],
+      sold: '',
     });
   }
 
   onSubmitPropertiesForm(){
     const newProperty = this.propertiesForm.value;
-    this.propertiesService.createProperty(newProperty);
-    console.log(this.properties);
+    if (this.editMode){
+      this.propertiesService.updateProperty(newProperty, this.indextoUpdate);
+      console.log(newProperty);
+    } else {
+      this.propertiesService.createProperty(newProperty);
+    }
 
   }
 
   //les champs du formulaire sont réinitialisés
   resetForm(){
     this.propertiesForm.reset();
+    this.editMode = false;
   }
 
   onDeleteProperty(){
@@ -73,6 +83,25 @@ export class AdminPropertiesComponent implements OnInit {
   //récupération de l'index pour le donner à la modal de confirmation
   recupIndex(index){
     this.indexSuppression = index;
+  }
+
+  onEditProperty(property, content){
+    this.open(content);
+    this.editMode = true;
+    this.propertiesForm.get('title').setValue(property.title);
+    this.propertiesForm.get('category').setValue(property.category);
+    this.propertiesForm.get('surface').setValue(property.surface);
+    this.propertiesForm.get('rooms').setValue(property.rooms);
+    this.propertiesForm.get('price').setValue(property.price);
+    this.propertiesForm.get('sold').setValue(property.sold);
+    const index = this.properties.findIndex(
+      (propertyEl) => {
+        if (propertyEl === property){
+          return true;
+        }
+      }
+    );
+    this.indextoUpdate = index;
   }
 
   // indexP(index){

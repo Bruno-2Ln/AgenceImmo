@@ -11,7 +11,7 @@
             <div class="d-flex">
                 <h3 class="font-weight-normal">{{ property.title }}</h3>
                 <div class="ml-auto">
-                    <button type="button" class="btn btn-primary m-1" title="modifier le bien"> <i class="fas fa-edit"></i></button>
+                    <button type="button" class="btn btn-primary m-1" title="modifier le bien" (click)="onEditProperty(property,propertiesFormModal)"> <i class="fas fa-edit"></i></button>
                     <button type="button" class="btn btn-danger m-1" title="effacer le bien" (click)="recupIndex(i);open(confirmDeleteProperty)"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>
@@ -19,7 +19,11 @@
                 {{ property.price}} €
             </p>
             <p>
-                {{ property.category}} <span *ngIf="property.surface && property.surface !== ''">de {{ property.surface}} m²</span><span *ngIf="property.rooms && property.rooms !== ''">, {{ property.surface }} pièce(s).</span>
+                {{ property.category}} <span *ngIf="property.surface && property.surface !== ''">de {{ property.surface}} m²</span><span *ngIf="property.rooms && property.rooms !== ''">, {{ property.rooms }} pièce(s).</span>
+            </p>
+            <p>
+                <span class="text-success" *ngIf="property.sold">Vendu</span>
+                <span class="text-danger" *ngIf="!property.sold">À vendre</span>
             </p>
         </div>
     </div>
@@ -61,6 +65,13 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Prix" formControlName="price">
                     </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="sold">
+                        <label for="customSwitch1" class="custom-control-label">
+                            <span class="text-success" *ngIf="propertiesForm.value.sold">Vendu</span>
+                            <span class="text-danger" *ngIf="!propertiesForm.value.sold">À vendre</span>
+                        </label>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="d('Cross click')">Annuler</button>
@@ -72,7 +83,7 @@
 
 <!-- Modal Confirm Suppression -->
 
- <ng-template #confirmDeleteProperty let-c="close" let-d="dismiss">
+<ng-template #confirmDeleteProperty let-c="close" let-d="dismiss">
     <div class="modal-content">
         <div class="modal-body">
 

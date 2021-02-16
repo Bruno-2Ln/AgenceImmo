@@ -43,6 +43,12 @@ deleteProperty(index){
   this.emitProperties;
 }
 
+updateProperty(property, index) {
+  this.properties[index] = property;
+  console.log(property);
+  this.emitProperties;
+}
+
 
   //on emet les données à chaque modification de données.
   emitProperties() {

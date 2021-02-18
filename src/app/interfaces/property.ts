@@ -6,5 +6,5 @@ export interface Property {
     description?: string;
     price: number;
     sold: boolean;
-    photo?: string;
+    photos?: any[];
 }

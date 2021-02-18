@@ -40,6 +40,7 @@ export class AdminPropertiesComponent implements OnInit {
         this.properties = properties
       }
       );
+      this.propertiesService.getProperties();
       this.propertiesService.emitProperties();
   }
 
@@ -56,7 +57,7 @@ export class AdminPropertiesComponent implements OnInit {
       rooms: ['', Validators.required],
       description: '',
       price: ['', Validators.required],
-      sold: '',
+      sold: false,
     });
   }
 

@@ -65,6 +65,22 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Prix" formControlName="price">
                     </div>
+                    <div class="form-row">
+                        <div class="col-9">
+                            <div class="input-group mb-3">
+                                <div class="custon-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onUploadFile($event)" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Envoyer une image</label>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="col-3" *ngIf="photoUploading">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="sold">
                         <label for="customSwitch1" class="custom-control-label">

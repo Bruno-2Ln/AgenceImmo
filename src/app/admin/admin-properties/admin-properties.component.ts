@@ -23,6 +23,10 @@ export class AdminPropertiesComponent implements OnInit {
   indextoUpdate: number;
   editMode: boolean = false;
 
+  photoUploading: boolean = false;
+  photoUploaded: boolean = false;
+  photoUrl: string;
+
   constructor(
     config: NgbModalConfig, 
     private modalService: NgbModal,
@@ -63,9 +67,9 @@ export class AdminPropertiesComponent implements OnInit {
 
   onSubmitPropertiesForm(){
     const newProperty: Property = this.propertiesForm.value;
+    newProperty.photo = this.photoUrl ? this.photoUrl : '';
     if (this.editMode){
       this.propertiesService.updateProperty(newProperty, this.indextoUpdate);
-      console.log(newProperty);
     } else {
       this.propertiesService.createProperty(newProperty);
     }
@@ -104,6 +108,20 @@ export class AdminPropertiesComponent implements OnInit {
       }
     );
     this.indextoUpdate = index;
+  }
+
+  onUploadFile(event){
+    this.photoUploading = true;
+    this.propertiesService.uploadFile(event.target.files[0]).then(
+      (url: string) => {
+        this.photoUrl = url;
+        this.photoUploading = false;
+        this.photoUploaded = true;
+        setTimeout(() => {
+          this.photoUploaded = false
+        }, 5000)
+      });
+   // this.propertiesService.uploadFile()
   }
 
   // indexP(index){

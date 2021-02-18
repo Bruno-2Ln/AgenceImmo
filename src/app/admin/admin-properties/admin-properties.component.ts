@@ -61,13 +61,16 @@ export class AdminPropertiesComponent implements OnInit {
       rooms: ['', Validators.required],
       description: '',
       price: ['', Validators.required],
-      sold: false,
+      sold: '',
     });
   }
 
   onSubmitPropertiesForm(){
     const newProperty: Property = this.propertiesForm.value;
+
+    newProperty.sold = this.propertiesForm.get('sold').value ? this.propertiesForm.get('sold').value : false;
     newProperty.photo = this.photoUrl ? this.photoUrl : '';
+
     if (this.editMode){
       this.propertiesService.updateProperty(newProperty, this.indextoUpdate);
     } else {
@@ -84,6 +87,11 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   onDeleteProperty(){
+    if (this.properties[this.indexSuppression].photo && this.properties[this.indexSuppression].photo !== '') {
+
+    this.propertiesService.removeFile(this.properties[this.indexSuppression].photo);
+    }
+
       this.propertiesService.deleteProperty(this.indexSuppression);
   }
 
@@ -114,8 +122,12 @@ export class AdminPropertiesComponent implements OnInit {
 
   onUploadFile(event){
     this.photoUploading = true;
+
     this.propertiesService.uploadFile(event.target.files[0]).then(
       (url: string) => {
+        if (this.photoUrl && this.photoUrl !== ''){
+          this.propertiesService.removeFile(this.photoUrl);
+        }
         this.photoUrl = url;
         this.photoUploading = false;
         this.photoUploaded = true;

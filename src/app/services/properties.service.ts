@@ -68,12 +68,27 @@ uploadFile(file: File){
         () => { //success
           upload.snapshot.ref.getDownloadURL().then((downloadUrl) => {
             resolve(downloadUrl);
-          })
+          });
         }
-      )
+      );
     }
-  )
+  );
 }
+
+  removeFile(fileLink: string){
+    if (fileLink) {
+      const storageRef = firebase.storage().refFromURL(fileLink);
+      storageRef.delete().then(
+        () => {
+          console.log('File deleted');
+        }
+      ).catch(
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
 
 
   //on emet les données à chaque modification de données.

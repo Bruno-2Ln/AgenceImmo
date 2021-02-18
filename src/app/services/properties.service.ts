@@ -61,11 +61,11 @@ uploadFile(file: File){
         () => {
           console.log('Chargement') //pending
         },
-        (error) => {
+        (error) => { //error
           console.error(error);
           reject(error);
         },
-        () => {
+        () => { //success
           upload.snapshot.ref.getDownloadURL().then((downloadUrl) => {
             resolve(downloadUrl);
           })

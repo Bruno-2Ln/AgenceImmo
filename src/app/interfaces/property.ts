@@ -7,4 +7,9 @@ export interface Property {
     price: number;
     sold: boolean;
     photos?: any[];
+    bedrooms?: number;
+    bathrooms?: number;
+    postal_code?: number;
+    city?: string;
+    reference?: number;
 }

@@ -59,7 +59,11 @@ export class AdminPropertiesComponent implements OnInit {
       category: ['', Validators.required],
       surface: ['', Validators.required],
       rooms: ['', Validators.required],
-      description: '',
+      bathrooms : ['', Validators.required],
+      bedrooms : ['', Validators.required],
+      postal_code : ['', Validators.required],
+      city : ['', Validators.required],
+      description: 'N\'attendez plus ! Appelez-nous pour avoir plus d\'informations et organisons une visite (Les petits gâteaux sont à notre charge)',
       price: ['', Validators.required],
       sold: '',
     });
@@ -67,7 +71,7 @@ export class AdminPropertiesComponent implements OnInit {
 
   onSubmitPropertiesForm(){
     const newProperty: Property = this.propertiesForm.value;
-
+    newProperty.reference = Date.now();
     newProperty.sold = this.propertiesForm.get('sold').value ? this.propertiesForm.get('sold').value : false;
     newProperty.photos = this.photosAdded ? this.photosAdded : [];
 
@@ -116,7 +120,11 @@ export class AdminPropertiesComponent implements OnInit {
     this.propertiesForm.get('category').setValue(property.category);
     this.propertiesForm.get('surface').setValue(property.surface);
     this.propertiesForm.get('rooms').setValue(property.rooms);
-    this.propertiesForm.get('description').setValue(property.description ? property.description : '');
+    this.propertiesForm.get('bathrooms').setValue(property.bathrooms);
+    this.propertiesForm.get('bedrooms').setValue(property.bedrooms);
+    this.propertiesForm.get('postal_code').setValue(property.postal_code);
+    this.propertiesForm.get('city').setValue(property.city);
+    this.propertiesForm.get('description').setValue(property.description ? property.description : "N'attendez plus ! Appelez-nous pour avoir plus d'informations et organisons une visite");
     this.propertiesForm.get('price').setValue(property.price);
     this.propertiesForm.get('sold').setValue(property.sold);
     this.photosAdded = property.photos ? property.photos : [];

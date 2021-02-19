@@ -11,14 +11,33 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-subtitle mb-2 text-muted"  style="height: 3rem;">{{ property.title }}</h5>
-                    <h6 class="card-subtitle mb-2 mt-1 text-muted">{{ property.category }}</h6>
-                    <p class="card-text mt-4">
-                        {{ property.category}} <span *ngIf="property.surface && property.surface !== ''">de {{ property.surface}} m²</span><span *ngIf="property.rooms && property.rooms !== ''">, {{ property.rooms }} pièce(s).</span>
-                    </p>
+                    <h5 class="card-subtitle mb-2 text-muted" style="height: 3rem;">{{ property.title }}</h5>
+                    <h6 class="card-subtitle mb-2 mt-1 text-muted">{{ property.city}}</h6>
+
+                    <div class="d-flex">
+                        <div class="col-5 p-0">
+                            <p class="mb-2">
+                                <i class="fas fa-bed"></i>
+                                <span *ngIf="property.bedrooms && property.bedrooms !== ''" class="ml-2">{{ property.bedrooms}}</span>
+                            </p>
+                            <p class="mb-2">
+                                <span *ngIf="property.surface && property.surface !== ''">{{ property.surface}} m²</span>
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-2">
+                                <i class="fas fa-bath"></i>
+                                <span *ngIf="property.bathrooms && property.bathrooms !== ''" class="ml-2">{{ property.bathrooms}}</span>
+                            </p>
+                            <p class="mb-2">
+                                <span *ngIf="property.rooms && property.rooms !== ''">{{ property.rooms }} pc(s)</span>
+                            </p>
+                        </div>
+                    </div>
+
                     <p *ngIf="property.price && property.price !== ''">
                         {{ property.price}} €
-                    </p>
+                    </p> 
                     <p [ngStyle]="{color: getSoldValue(i)}">
                     <span *ngIf="!property.sold">A vendre</span>
                     <span *ngIf="property.sold">Vendu !</span>

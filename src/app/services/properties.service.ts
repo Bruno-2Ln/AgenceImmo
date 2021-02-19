@@ -47,8 +47,25 @@ saveProperties(){
 
 getProperties() {
   firebase.database().ref('/properties').on('value', (data) => {
-    this.properties = data.val() ? data.val() : [];this.emitProperties();
+    this.properties = data.val() ? data.val() : [];
+    this.emitProperties();
   });
+}
+
+getSingleProperties(id) {
+  return new Promise(
+    (resolve, reject) => {
+      firebase.database().ref('/properties/' + id).once('value').then(
+        (data) => {
+          resolve(data.val());
+        }
+      ).catch(
+        (error) => {
+          reject(error);
+        }
+      );
+    }
+  );
 }
 
 uploadFile(file: File){

@@ -1,0 +1,39 @@
+<div class="container py-5" *ngIf="property">
+    <h1 class="display-4"></h1>
+    <hr class="bg-dark mb-4 mt-2">
+    <div class="row">
+        <div class="col-md-6">
+            <div *ngIf="property.photos.length === 1">
+                <div *ngFor="let photo of property.photos; let first = first">
+                    <img [src]="photo" alt="photo du bien en vente" class="w-100"/>
+                </div>
+            </div>
+            
+
+                <ngb-carousel class="mb-3" *ngIf="property.photos.length > 1">
+                    <ng-template ngbSlide *ngFor="let photo of property.photos; let first = first; let i = index">
+                        <div class="picsum-img-wrapper">
+                        
+                            <img class="d-block w-100" [src]="property.photos[i]" alt="Photo du bien">
+                        
+                    </div>
+                    </ng-template>
+                
+                </ngb-carousel>
+
+
+
+        </div>
+        <div class="col-md-6">
+            <h3 class="font-weight-normal">{{property.price}} €</h3>
+            <p class="font-weight-light">
+                {{ property.category}} <span *ngIf="property.surface && property.surface !== ''">de {{ property.surface}} m²</span><span *ngIf="property.rooms && property.rooms !== ''">, {{ property.rooms }} pièce(s).</span>
+            </p>
+            <p class="font-weight-light">
+                {{ property.description }}
+            </p>
+            <h3 class="font-weight-normal text-danger" *ngIf="property.sold">Vendu!</h3>
+            <h3 class="font-weight-normal text-success" *ngIf="!property.sold">A vendre !</h3>
+        </div>
+    </div>
+</div>

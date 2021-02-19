@@ -29,7 +29,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       //   console.log('Observable complete!')
       // }
     )
-    this.propertiesService.emitProperties()
+    this.propertiesService.getProperties();
+    this.propertiesService.emitProperties();
   }
 
   getSoldValue(index) {
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       return 'green';
     }
   }
+
 
   ngOnDestroy() {
     this.propertiesSubcription.unsubscribe();

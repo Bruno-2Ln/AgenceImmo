@@ -8,20 +8,13 @@
                     <img [src]="photo" alt="photo du bien en vente" class="w-100"/>
                 </div>
             </div>
-            
-
-                <ngb-carousel class="mb-3" *ngIf="property.photos.length > 1">
-                    <ng-template ngbSlide *ngFor="let photo of property.photos; let first = first; let i = index">
-                        <div class="picsum-img-wrapper">
-                        
-                            <img class="d-block w-100" [src]="property.photos[i]" alt="Photo du bien">
-                        
+            <ngb-carousel class="mb-3" *ngIf="property.photos.length > 1">
+                <ng-template ngbSlide *ngFor="let photo of property.photos; let first = first; let i = index">
+                    <div class="picsum-img-wrapper">
+                        <img class="d-block w-100" [src]="property.photos[i]" alt="Photo du bien">
                     </div>
-                    </ng-template>
-                
-                </ngb-carousel>
-
-
+                </ng-template>
+            </ngb-carousel>
 
         </div>
         <div class="col-md-6">

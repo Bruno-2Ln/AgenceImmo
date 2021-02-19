@@ -1,0 +1,61 @@
+<div class="rounded shadow bg-white p-5">
+    <div class="row">
+        <div class="col-12 d-flex">
+            <h2 class="font-weight-light"><i class="fas fa-user-alt"></i> Agents Immobiliers</h2>
+            <button class="btn btn-primary ml-auto" type="button" (click)="open(agentFormModal);resetForm()"><i class="fas fa-plus"></i> Ajouter un agent</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #agentFormModal let-c="close" let-d="dismiss">
+    <div class="modal-content">
+        <form [formGroup]="agentForm" (ngSubmit)="onSubmitAgentForm(agentForm)">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agentFormModalTitle">Edition d'un agent immobilier</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" placeholder="Prénom" class="form-control" formControlName="firstname">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Nom" class="form-control" formControlName="lastname">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Téléphone" class="form-control" formControlName="phone">
+                </div>
+
+                <!-- <div class="row">
+                    <div *ngFor="let photo of photosAdded;let i = index" class="col-4  border border-secondary rounded m-1 p-1 bg-light position-relative">
+                        <span class="text-danger position-absolut mr-1 deletePhoto" (click)=onRemoveAddedPhoto(i)>
+                            <i class="fas fa-times"></i>
+                        </span>
+                        <img [src]="photo" alt="photo illustrant le bien" class="w-100">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-9">
+                        <div class="input-group mb-3">
+                            <div class="custon-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onUploadFile($event)" aria-describedby="inputGroupFileAddon01">
+                                <label class="custom-file-label" for="inputGroupFile01">Envoyer une image</label>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-3" *ngIf="photoUploading">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden"></span>
+                        </div>
+                    </div>
+                </div> -->
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="d('Cross click')">Annuler</button>
+                <button class="btn btn-primary" (click)="c('Save click')" type="submit" [disabled]="agentForm.invalid">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

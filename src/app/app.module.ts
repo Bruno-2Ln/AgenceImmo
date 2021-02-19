@@ -11,6 +11,7 @@ import { AdminPropertiesComponent } from './admin/admin-properties/admin-propert
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SigninComponent } from './authentication/signin/signin.component';
 import { SinglePropertyComponent } from './components/single-property/single-property.component';
+import { AdminAgentComponent } from './admin/admin-agent/admin-agent.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SinglePropertyComponent } from './components/single-property/single-pro
     AdminDashboardComponent,
     AdminPropertiesComponent,
     SigninComponent,
-    SinglePropertyComponent
+    SinglePropertyComponent,
+    AdminAgentComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,31 @@
         </div>
     </div>
 </div>
+<hr class="mt-1 mb-5 bg-dark">
+<div class="row">
+    <div *ngFor="let agent of agents; let i = index" class="col-12 shadow-sm p-4 mb-3 bg-light">
+        <div class="row">
+            <div class="col-3 container-fluid">
+                <div class="text-center">
+                    <img [src]="agent.photo" class="w-50" alt="Photo de l'agent immobilier">
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="d-flex">
+                    <h3 class="font-weight-normal mb-0">
+                        {{agent.firstname}} {{agent.lastname}}
+                    </h3>
+                </div>
+                <div class="d-flex">
+                    <div class="mb-2"></div>
+                    <h5 class="font-weight-normal mb-0 text-muted">{{agent.phone}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <ng-template #agentFormModal let-c="close" let-d="dismiss">
     <div class="modal-content">
@@ -27,12 +52,12 @@
                     <input type="text" placeholder="Téléphone" class="form-control" formControlName="phone">
                 </div>
 
-                <!-- <div class="row">
-                    <div *ngFor="let photo of photosAdded;let i = index" class="col-4  border border-secondary rounded m-1 p-1 bg-light position-relative">
+                <div class="row">
+                    <div class="col-4 border border-secondary rounded m-1 p-1 bg-light position-relative" *ngIf="photo">
                         <span class="text-danger position-absolut mr-1 deletePhoto" (click)=onRemoveAddedPhoto(i)>
                             <i class="fas fa-times"></i>
                         </span>
-                        <img [src]="photo" alt="photo illustrant le bien" class="w-100">
+                        <img [src]="photo" alt="photo d'identité de l'agent immobilier" class="w-100">
                     </div>
                 </div>
                 <div class="form-row">
@@ -40,7 +65,7 @@
                         <div class="input-group mb-3">
                             <div class="custon-file">
                                 <input type="file" class="custom-file-input" id="inputGroupFile01" (change)="onUploadFile($event)" aria-describedby="inputGroupFileAddon01">
-                                <label class="custom-file-label" for="inputGroupFile01">Envoyer une image</label>
+                                <label class="custom-file-label" for="inputGroupFile01">Envoyer une photo</label>
                             </div>
                         </div> 
                     </div>
@@ -49,7 +74,7 @@
                             <span class="visually-hidden"></span>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 
             </div>
             <div class="modal-footer">

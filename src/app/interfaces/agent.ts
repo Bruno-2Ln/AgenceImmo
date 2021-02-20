@@ -1,4 +1,4 @@
-export interface Admin {
+export interface Agent {
     firstname: string;
     lastname: string;
     photo?: string;

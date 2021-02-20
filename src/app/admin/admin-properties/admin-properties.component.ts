@@ -98,12 +98,14 @@ export class AdminPropertiesComponent implements OnInit {
     // this.propertiesService.removeFile(this.properties[this.indexSuppression].photo);
     // }
 
-    //suppression de toutes les photos
+    //suppression de toutes les photos SI elles existent
+    if (this.properties[this.indexSuppression].photos){
       this.properties[this.indexSuppression].photos.forEach(
         (photo) => {
           this.propertiesService.removeFile(photo);
         }
       );
+    }
 
       this.propertiesService.deleteProperty(this.indexSuppression);
   }
@@ -155,7 +157,7 @@ export class AdminPropertiesComponent implements OnInit {
 
   onRemoveAddedPhoto(index) {
     this.propertiesService.removeFile(this.photosAdded[index]);
-    this.photosAdded.splice(index, 1);
+    this.photosAdded.splice(index, 1); 
   
   }
 

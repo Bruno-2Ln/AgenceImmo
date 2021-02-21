@@ -20,6 +20,20 @@ export class AgentsService {
     this.emitAgents();
   }
 
+  deleteAgent(index){
+    this.agents.splice(index, 1);
+    this.saveAgents();
+    this.emitAgents();
+  }
+
+  updateAgent(agent: Agent, index){
+    firebase.database().ref('/agents/' + index).update(agent).catch(
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
   saveAgents(){
     firebase.database().ref('/agents').set(this.agents);
   }
@@ -33,6 +47,21 @@ export class AgentsService {
 
   emitAgents(){
     this.agentsSubject.next(this.agents);
+  }
+
+  removeFile(fileLink: string){
+    if (fileLink){
+      const storageRef = firebase.storage().refFromURL(fileLink);
+      storageRef.delete().then(
+        () => {
+          console.log('File deleted');
+        }
+      ).catch(
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
   }
 
   uploadFile(file: File){
@@ -60,5 +89,7 @@ export class AgentsService {
       }
     );
   }
+
+  
 
 }

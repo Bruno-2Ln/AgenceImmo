@@ -16,6 +16,11 @@ export class AdminAgentComponent implements OnInit {
   agentForm: FormGroup;
   agents: Agent[] = [];
 
+  indexSuppression: number; //va remfermer l'index trouvé
+  indexToUpdate: number;
+  
+  editMode: boolean = false;
+
   //les différents états de l'envoi d'une photo
   photoUploading = false; // pending
   photoUploaded = false; // complete
@@ -43,6 +48,11 @@ export class AdminAgentComponent implements OnInit {
     this.agentsService.emitAgents();
   }
 
+  //récupération de l'index pour le donner à la modal de confirmation
+  recupIndex(index){
+    this.indexSuppression = index;
+  }
+
   open(content){
     this.modalService.open(content);
   }
@@ -55,15 +65,45 @@ export class AdminAgentComponent implements OnInit {
     });
   }
 
+  onDeleteAgent(){
+    if (this.agents[this.indexSuppression].photo && this.agents[this.indexSuppression].photo !== ''){
+      this.agentsService.removeFile(this.agents[this.indexSuppression].photo);
+    }
+    this.agentsService.deleteAgent(this.indexSuppression);
+  }
+
   onSubmitAgentForm(){
     const newAgent: Agent = this.agentForm.value; 
     newAgent.photo = this.photoUrl ? this.photoUrl : "";
 
-    this.agentsService.createAgent(newAgent)
+    if (this.editMode) {
+      this.agentsService.updateAgent(newAgent, this.indexToUpdate);
+    } else {
+      this.agentsService.createAgent(newAgent);
+    }
   }
 
   resetForm(){
     this.agentForm.reset();
+    this.editMode = false;
+    this.photoUrl = '';
+  }
+
+  onEditAgent(agent: Agent, content){
+    this.open(content);
+    this.editMode = true;
+    this.agentForm.get('firstname').setValue(agent.firstname);
+    this.agentForm.get('lastname').setValue(agent.lastname);
+    this.agentForm.get('phone').setValue(agent.phone);
+    this.photoUrl = agent.photo ? agent.photo : "";
+    const index = this.agents.findIndex(
+      (agentEl) => {
+        if (agentEl === agent) {
+          return true;
+        }
+      }
+    );
+    this.indexToUpdate = index;;
   }
 
   onUploadFile(event){
@@ -81,6 +121,10 @@ export class AdminAgentComponent implements OnInit {
     );
   }
 
+  onRemovePhoto(){
+    this.agentsService.removeFile(this.photoUrl);
+    this.photoUrl = '';
+  }
 
 
 }

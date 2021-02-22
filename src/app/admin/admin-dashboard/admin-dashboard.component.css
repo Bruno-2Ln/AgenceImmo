@@ -1,0 +1,17 @@
+.options-dashboard i{
+    font-size: 50px;
+    color: #1b1b1b;
+}
+
+.options-dashboard span{
+    font-size: 22px;
+    color: #1b1b1b;
+}
+
+.options-dashboard {
+    background-color: transparent;
+}
+
+.visibility {
+    color: red;
+}

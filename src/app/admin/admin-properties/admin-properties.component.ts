@@ -42,6 +42,7 @@ export class AdminPropertiesComponent implements OnInit {
     this.propertiesService.propertiesSubject.subscribe(
       (properties: Property[]) => {
         this.properties = properties
+        console.log(properties);
       }
       );
       this.propertiesService.getProperties();
@@ -66,12 +67,14 @@ export class AdminPropertiesComponent implements OnInit {
       description: 'N\'attendez plus ! Appelez-nous pour avoir plus d\'informations et organisons une visite (Les petits gâteaux sont à notre charge)',
       price: ['', Validators.required],
       sold: '',
+      heart_stroke: '',
     });
   }
 
   onSubmitPropertiesForm(){
     const newProperty: Property = this.propertiesForm.value;
     newProperty.sold = this.propertiesForm.get('sold').value ? this.propertiesForm.get('sold').value : false;
+    newProperty.heart_stroke = this.propertiesForm.get('heart_stroke').value ? this.propertiesForm.get('heart_stroke').value : false;
     newProperty.photos = this.photosAdded ? this.photosAdded : [];
 
     if (this.editMode){
@@ -129,6 +132,7 @@ export class AdminPropertiesComponent implements OnInit {
     this.propertiesForm.get('description').setValue(property.description ? property.description : "N'attendez plus ! Appelez-nous pour avoir plus d'informations et organisons une visite");
     this.propertiesForm.get('price').setValue(property.price);
     this.propertiesForm.get('sold').setValue(property.sold);
+    this.propertiesForm.get('heart_stroke').setValue(property.heart_stroke);
     this.photosAdded = property.photos ? property.photos : [];
     const index = this.properties.findIndex(
       (propertyEl) => {

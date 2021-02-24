@@ -12,4 +12,5 @@ export interface Property {
     postal_code?: number;
     city?: string;
     reference?: number;
+    heart_stroke?: boolean;
 }

@@ -13,6 +13,7 @@ import { SigninComponent } from './authentication/signin/signin.component';
 import { SinglePropertyComponent } from './components/single-property/single-property.component';
 import { AdminAgentComponent } from './admin/admin-agent/admin-agent.component';
 import { AccueilComponent } from './components/accueil/accueil.component';
+import { HeartStrokePropertyComponent } from './heart-stroke-property/heart-stroke-property.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AccueilComponent } from './components/accueil/accueil.component';
     SigninComponent,
     SinglePropertyComponent,
     AdminAgentComponent,
-    AccueilComponent
+    AccueilComponent,
+    HeartStrokePropertyComponent
   ],
   imports: [
     BrowserModule,

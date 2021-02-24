@@ -132,14 +132,20 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="custom-control custom-switch">
+                <div class="d-flex">
+                <div class="custom-control custom-switch w-50">
                     <input type="checkbox" class="custom-control-input" id="customSwitch1" formControlName="sold">
                     <label for="customSwitch1" class="custom-control-label">
                         <span class="text-success" *ngIf="propertiesForm.value.sold">Vendu</span>
                         <span class="text-danger" *ngIf="!propertiesForm.value.sold">À vendre</span>
                     </label>
                 </div>
+                <div class="form-check w-50">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="heart_stroke">
+                    <label class="form-check-label" for="exampleCheck1"><i class="fas fa-heart text-danger"></i></label>
+                </div>
+</div>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="d('Cross click')">Annuler</button>

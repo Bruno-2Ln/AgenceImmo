@@ -1,0 +1,16 @@
+<div class="card-group" >
+    <div class="card" *ngFor="let property of properties; let i = index">
+        <div class="h-50">
+            <div *ngFor="let photo of property.photos; let first = first" class="h-100">
+                <img *ngIf="first" class="card-img-top img-fluid mh-100" [src]="photo" alt="Card image cap">
+            </div>
+        </div>
+        <div class="card-body h-25">
+            <h5 class="card-title">{{property.title}}{{property.i}}</h5>
+            <p class="card-text">{{property.description}}</p>
+        </div>
+        <div class="card-footer">
+            <h3>{{property.price}} €</h3>
+        </div>
+    </div>
+</div>

@@ -9,9 +9,12 @@ import firebase from 'firebase';
 export class PropertiesService {
 
   properties: Property[] = [];
+  propertiesHeart: Property[] = [];
 
+  proprietiesAccess = firebase.database().ref("properties")
 
   propertiesSubject = new Subject<Property[]>();
+  propertiesHeartSubject = new Subject<Property[]>();
 
   constructor() { }
 
@@ -107,10 +110,22 @@ uploadFile(file: File){
     }
   }
 
-
   //on emet les données à chaque modification de données.
   emitProperties() {
     this.propertiesSubject.next(this.properties);
+  }
+
+  emitPropertiesHeart() {
+    this.propertiesHeartSubject.next(this.propertiesHeart);
+  }
+
+  getPropertiesByProprietyObject(propriety: string, value: string|boolean){
+    
+      this.proprietiesAccess.orderByChild(propriety).equalTo(value).on("child_added", (snap) => {
+        this.propertiesHeart = snap.val() ? snap.val() : [];
+        this.emitPropertiesHeart();
+      }
+    );
   }
 
   // getProperties() { //promesse
@@ -136,7 +151,6 @@ uploadFile(file: File){
   //       }
   //     })
   //   }
-
 
 
 }

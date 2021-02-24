@@ -71,13 +71,13 @@ export class AdminPropertiesComponent implements OnInit {
 
   onSubmitPropertiesForm(){
     const newProperty: Property = this.propertiesForm.value;
-    newProperty.reference = Date.now();
     newProperty.sold = this.propertiesForm.get('sold').value ? this.propertiesForm.get('sold').value : false;
     newProperty.photos = this.photosAdded ? this.photosAdded : [];
 
     if (this.editMode){
       this.propertiesService.updateProperty(newProperty, this.indextoUpdate);
     } else {
+      newProperty.reference = Date.now();
       this.propertiesService.createProperty(newProperty);
     }
 

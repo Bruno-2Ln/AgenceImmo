@@ -14,6 +14,49 @@ export class AgentsService {
 
   constructor() { }
 
+  //------------------------------------------
+  //--------tests requètes firebase-----------
+  //------------------------------------------
+
+  //récupère un tableau des objets Agent
+  selectAllAgents(){
+
+  let testRef = firebase.database().ref('agents/');
+  testRef.on('value', (snapshot) => {
+    const data = snapshot.val();
+  console.log(data);
+  }) 
+
+}
+
+//Sélectionne les agents en les classant par leur prénoms
+selectByNames() {
+
+  let testRef = firebase.database().ref("agents")
+  testRef.orderByChild("firstname").on("child_added", snap => console.log(snap.val()))
+
+}
+
+//Sélectionne les objets Agent venant après le prénom spécifié
+selectObjectAfterName(){
+
+  let testRef = firebase.database().ref("agents")
+  testRef.orderByChild("firstname").startAt("Tory").on("child_added", (snap) => {
+  console.log(snap.val())})
+}
+
+//Selectionne les agents par une propriété et la valeur souhaitée
+selectAgents(propriety: string, value: string){
+  let testRef = firebase.database().ref("agents")
+  testRef.orderByChild(propriety).equalTo(value).on("child_added", (snap) => {
+  console.log(snap.val())})
+
+}
+
+//----------------------------------------------
+//----------------------------------------------
+//----------------------------------------------
+
   createAgent(agent: Agent){
     this.agents.push(agent);
     this.saveAgents();
@@ -28,7 +71,7 @@ export class AgentsService {
 
   updateAgent(agent: Agent, index){
     firebase.database().ref('/agents/' + index).update(agent).catch(
-      (error) => {
+    (error) => {
         console.error(error);
       }
     );

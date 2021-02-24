@@ -1,0 +1,11 @@
+
+#section-1{
+    height: 80vh;
+    background-image: linear-gradient(rgba(87, 81, 81, 0.356) 0%, rgba(88, 85, 85, 0.247)), url(../../../assets/images/ville-place.jpg);
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+#section-2 h3{
+    font-family: 'RocknRoll One', 'sans-serif';
+}

@@ -22,7 +22,6 @@ export class HeartStrokePropertyComponent implements OnInit, OnDestroy {
     this.propertiesSubcription = this.propertiesService.propertiesHeartSubject.subscribe(
       (properties: any) => {
         this.properties.push(properties);
-        //console.log(properties);
       })
 
     this.propertiesService.getPropertiesByProprietyObject("heart_stroke", true);

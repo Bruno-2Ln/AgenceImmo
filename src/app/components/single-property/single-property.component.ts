@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Property } from 'src/app/interfaces/property';
 import { PropertiesService } from 'src/app/services/properties.service';
 
@@ -12,7 +13,10 @@ import { PropertiesService } from 'src/app/services/properties.service';
 export class SinglePropertyComponent implements OnInit {
 
   images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+
   property: Property;
+  propertySubscription: Subscription;
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -20,9 +24,11 @@ export class SinglePropertyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    //const id = this.route.snapshot.params['id'];
-    this.propertiesService.getSingleProperties(id).then(
+    const id = +this.route.snapshot.paramMap.get('ref');
+
+    //const id = this.route.snapshot.params['ref'];
+
+    this.propertiesService.getSinglePropertyByRef(id).then(
       (property: Property) => {
         this.property = property;
       }
@@ -31,7 +37,10 @@ export class SinglePropertyComponent implements OnInit {
         console.error(error);
       }
     );
+
   }
+
+
 
 
 

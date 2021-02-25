@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-6">
             <div *ngIf="property.photos.length === 1">
-                <div *ngFor="let photo of property.photos; let first = first">
+                <div *ngFor="let photo of property.photos; let first = first" class="img-fluid">
                     <img [src]="photo" alt="photo du bien en vente" class="w-100"/>
                 </div>
             </div>

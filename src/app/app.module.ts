@@ -14,6 +14,7 @@ import { SinglePropertyComponent } from './components/single-property/single-pro
 import { AdminAgentComponent } from './admin/admin-agent/admin-agent.component';
 import { AccueilComponent } from './components/accueil/accueil.component';
 import { HeartStrokePropertyComponent } from './heart-stroke-property/heart-stroke-property.component';
+import { SearchPropertiesComponent } from './components/search-properties/search-properties.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HeartStrokePropertyComponent } from './heart-stroke-property/heart-stro
     SinglePropertyComponent,
     AdminAgentComponent,
     AccueilComponent,
-    HeartStrokePropertyComponent
+    HeartStrokePropertyComponent,
+    SearchPropertiesComponent
   ],
   imports: [
     BrowserModule,

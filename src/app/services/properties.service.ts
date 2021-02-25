@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Property } from '../interfaces/property';
 import firebase from 'firebase';
 
@@ -10,13 +10,15 @@ export class PropertiesService {
 
   properties: Property[] = [];
   propertiesHeart: Property[] = [];
+  
 
   proprietiesAccess = firebase.database().ref("properties")
 
   propertiesSubject = new Subject<Property[]>();
   propertiesHeartSubject = new Subject<Property[]>();
 
-  constructor() { }
+
+  constructor() {}
 
 
 createProperty(property: Property) {
@@ -55,21 +57,41 @@ getProperties() {
   });
 }
 
-getSingleProperties(id) {
+// getSingleProperty(id) {
+//   return new Promise(
+//     (resolve, reject) => {
+//       firebase.database().ref('/properties/' + id).once('value').then(
+//         (data) => {
+//           resolve(data.val());
+//           //console.log(data.val());
+//         }
+//       ).catch(
+//         (error) => {
+//           reject(error);
+//         }
+//       );
+//     }
+//   );
+// }
+
+//Selectionne une propriété par sa référence
+getSinglePropertyByRef(id){
   return new Promise(
     (resolve, reject) => {
-      firebase.database().ref('/properties/' + id).once('value').then(
-        (data) => {
-          resolve(data.val());
-        }
-      ).catch(
-        (error) => {
-          reject(error);
-        }
-      );
-    }
-  );
+
+  this.proprietiesAccess.orderByChild("reference").equalTo(id).on("child_added",
+      (data) => {
+        resolve(data.val());
+        console.log(data.val())
+      },
+      (error) => {
+        console.error(error);
+        reject(error);
+      }
+    
+  )})
 }
+
 
 uploadFile(file: File){
   return new Promise(
@@ -119,7 +141,7 @@ uploadFile(file: File){
     this.propertiesHeartSubject.next(this.propertiesHeart);
   }
 
-  getPropertiesByProprietyObject(propriety: string, value: string|boolean){
+  getPropertiesByProprietyObject(propriety: string, value: string|boolean|number){
     
       this.proprietiesAccess.orderByChild(propriety).equalTo(value).on("child_added", (snap) => {
         this.propertiesHeart = snap.val() ? snap.val() : [];
@@ -127,6 +149,7 @@ uploadFile(file: File){
       }
     );
   }
+  
 
   // getProperties() { //promesse
   // //   return new Promise(

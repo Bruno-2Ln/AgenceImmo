@@ -13,4 +13,5 @@ export interface Property {
     city?: string;
     reference?: number;
     heart_stroke?: boolean;
+    indexSearch?: string
 }

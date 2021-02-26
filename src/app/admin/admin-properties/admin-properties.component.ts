@@ -27,6 +27,8 @@ export class AdminPropertiesComponent implements OnInit {
   photoUploaded: boolean = false;
   photosAdded: any[] = [];
 
+  ranking: string;
+
   constructor(
     config: NgbModalConfig, 
     private modalService: NgbModal,
@@ -42,11 +44,11 @@ export class AdminPropertiesComponent implements OnInit {
     this.propertiesService.propertiesSubject.subscribe(
       (properties: Property[]) => {
         this.properties = properties
-        console.log(properties);
+        //console.log(properties);
       }
       );
       this.propertiesService.getProperties();
-      this.propertiesService.emitProperties();
+      //this.propertiesService.emitProperties();
   }
 
   // Ouverture Modal
@@ -72,11 +74,23 @@ export class AdminPropertiesComponent implements OnInit {
   }
 
   onSubmitPropertiesForm(){
+    const value =  +this.propertiesForm.get('price').value
+
+    if (value < 100000){
+      this.ranking = "moins de 100000"
+    } else if (value <= 300000){
+      this.ranking = "de 100000 à 300000"
+    } else if (value <= 500000){
+      this.ranking = "de 300001 à 500000"
+    } else if (value > 500001){
+      this.ranking = "plus de 500000"
+    }
+
     const newProperty: Property = this.propertiesForm.value;
     newProperty.sold = this.propertiesForm.get('sold').value ? this.propertiesForm.get('sold').value : false;
     newProperty.heart_stroke = this.propertiesForm.get('heart_stroke').value ? this.propertiesForm.get('heart_stroke').value : false;
     newProperty.photos = this.photosAdded ? this.photosAdded : [];
-
+    newProperty.indexSearch = this.propertiesForm.get('city').value + "_" + this.propertiesForm.get('category').value + "_" + this.ranking + "_" + this.propertiesForm.get('surface').value
     if (this.editMode){
       this.propertiesService.updateProperty(newProperty, this.indextoUpdate);
     } else {

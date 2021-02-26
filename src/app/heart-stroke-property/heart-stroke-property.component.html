@@ -6,9 +6,29 @@
                 <img *ngIf="first" class="card-img-top img-fluid mh-100" [src]="photo" alt="Card image cap">
             </div>
         </div>
-        <div class="card-body h-25">
+        <div class="card-body">
             <h5 class="card-title">{{property.title}}{{property.i}}</h5>
-            <p class="card-text">{{property.description}}</p>
+            <h6 class="card-subtitle mt-1 text-muted pb-0">{{ property.city}}</h6>
+        </div>
+        <div class="d-flex mb-3">
+            <div class="col-5 p-0">
+                <p class="mb-2 text-center">
+                    <i class="fas fa-bed"></i>
+                    <span *ngIf="property.bedrooms && property.bedrooms !== ''" class="ml-2">{{ property.bedrooms}}</span>
+                </p>
+                <p class="mb-2 text-center">
+                    <span *ngIf="property.surface && property.surface !== ''">{{ property.surface}} m²</span>
+                </p>
+            </div>
+            <div class="col-6">
+                <p class="mb-2 text-center">
+                    <i class="fas fa-bath"></i>
+                    <span *ngIf="property.bathrooms && property.bathrooms !== ''" class="ml-2">{{ property.bathrooms}}</span>
+                </p>
+                <p class="mb-2 text-center">
+                    <span *ngIf="property.rooms && property.rooms !== ''">{{ property.rooms }} pc(s)</span>
+                </p>
+            </div>
         </div>
         <div class="card-footer d-flex">
             <h3>{{property.price}} €</h3>

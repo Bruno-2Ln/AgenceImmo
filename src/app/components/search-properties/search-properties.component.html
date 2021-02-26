@@ -1,1 +1,42 @@
-<p>search-properties works!</p>
+
+<div class="p-4" id="container-search-properties" *ngIf="categories">
+    <p class="typo">Quel(s) bien(s) recherchez-vous ?</p>
+    
+    <form [formGroup]="searchPropertiesForm">
+        <div>
+            <div class="form-group d-flex mb-3">
+                <div class="input-group">
+                    <label class="input-group-text" for="inputGroupSelect02">Où :</label> 
+                    <select class="custom-select form-control" id="inputGroupSelect02" formControlName="city">
+                        <option value="{{element}}" *ngFor="let element of cities">{{element}}</option>
+                    </select>
+                </div>
+                <div class="input-group ml-3">
+                    <label class="input-group-text" for="inputGroupSelect01">Type :</label> 
+                    <select class="custom-select form-control" id="inputGroupSelect01" formControlName="category">
+                        <option value="{{element}}" *ngFor="let element of categories">{{element}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex form-group mb-0"> 
+            <!-- custom select -->
+
+                <div class="form-group">
+                    <input type="text" placeholder="Surface (m²)" class="form-control" formControlName="surface">
+                </div>
+            
+                <div class="input-group ml-3 form-group ">
+                    <label class="input-group-text" for="inputGroupSelect03">Prix :</label> 
+                    <select class="custom-select form-control" id="inputGroupSelect03" formControlName="price">
+                        <option value="{{element}}" *ngFor="let element of prices">{{element}}</option>
+                    </select>
+                </div>
+
+                <div class="ml-3">
+                    <button class="btn btn-primary" type="submit" [disabled]="searchPropertiesForm.invalid">Trouver</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

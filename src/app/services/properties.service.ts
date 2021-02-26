@@ -10,27 +10,25 @@ export class PropertiesService {
 
   properties: Property[] = [];
   propertiesHeart: Property[] = [];
-  
 
   proprietiesAccess = firebase.database().ref("properties")
 
   propertiesSubject = new Subject<Property[]>();
   propertiesHeartSubject = new Subject<Property[]>();
 
-
+ 
   constructor() {}
-
 
 createProperty(property: Property) {
   this.properties.push(property);
   this.saveProperties();
-  this.emitProperties;
+  this.emitProperties();
 }
 
 deleteProperty(index){
   this.properties.splice(index, 1);
   this.saveProperties();
-  this.emitProperties;
+  this.emitProperties();
 }
 
 //2 solutions pour l'update

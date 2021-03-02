@@ -16,7 +16,7 @@ export class PropertiesService {
   propertiesSubject = new Subject<Property[]>();
   propertiesHeartSubject = new Subject<Property[]>();
 
- 
+
   constructor() {}
 
 createProperty(property: Property) {
@@ -55,29 +55,29 @@ getProperties() {
   });
 }
 
-// getSingleProperty(id) {
-//   return new Promise(
-//     (resolve, reject) => {
-//       firebase.database().ref('/properties/' + id).once('value').then(
-//         (data) => {
-//           resolve(data.val());
-//           //console.log(data.val());
-//         }
-//       ).catch(
-//         (error) => {
-//           reject(error);
-//         }
-//       );
-//     }
-//   );
-// }
+getPropertiesOrderBy(){
+  firebase.database().ref('/properties')
+                      .orderByChild("price")
+                      .on("child_added", snap => {
+                          //console.log(snap.val());
+                      });
+}
+
+getPropertiesByProprietyObject(propriety: string, value: string|boolean|number){
+    
+  this.proprietiesAccess.orderByChild(propriety).equalTo(value).on("child_added", (snap) => {
+    this.propertiesHeart = snap.val() ? snap.val() : [];
+    this.emitPropertiesHeart();
+  }
+);
+}
 
 //Selectionne une propriété par sa référence
-getSinglePropertyByRef(id){
+getSinglePropertyByRef(ref){
   return new Promise(
     (resolve, reject) => {
 
-  this.proprietiesAccess.orderByChild("reference").equalTo(id).on("child_added",
+  this.proprietiesAccess.orderByChild("reference").equalTo(ref).on("child_added",
       (data) => {
         resolve(data.val());
         console.log(data.val())
@@ -139,15 +139,19 @@ uploadFile(file: File){
     this.propertiesHeartSubject.next(this.propertiesHeart);
   }
 
-  getPropertiesByProprietyObject(propriety: string, value: string|boolean|number){
-    
-      this.proprietiesAccess.orderByChild(propriety).equalTo(value).on("child_added", (snap) => {
-        this.propertiesHeart = snap.val() ? snap.val() : [];
-        this.emitPropertiesHeart();
-      }
-    );
+  propertiesSearchSubject = new Subject<Property[]>();
+  value;
+
+  recup(data){
+    this.value = data;
+    console.log(this.value)
+    this.emitSearchProperties();
   }
-  
+
+  emitSearchProperties() {
+    // this.propertiesSearchSubject.next(this.search);
+    this.propertiesSearchSubject.next(this.value);
+  }
 
   // getProperties() { //promesse
   // //   return new Promise(
@@ -173,5 +177,20 @@ uploadFile(file: File){
   //     })
   //   }
 
-
+// getSingleProperty(id) {
+//   return new Promise(
+//     (resolve, reject) => {
+//       firebase.database().ref('/properties/' + id).once('value').then(
+//         (data) => {
+//           resolve(data.val());
+//           //console.log(data.val());
+//         }
+//       ).catch(
+//         (error) => {
+//           reject(error);
+//         }
+//       );
+//     }
+//   );
+// }
 }

@@ -2,7 +2,7 @@
 <div class="p-4" id="container-search-properties" *ngIf="categories">
     <p class="typo">Quel(s) bien(s) recherchez-vous ?</p>
     
-    <form [formGroup]="searchPropertiesForm">
+    <form [formGroup]="searchPropertiesForm" (ngSubmit)="onSubmitSearchPropertiesForm()">
         <div>
             <div class="form-group d-flex mb-3">
                 <div class="input-group">
@@ -21,11 +21,11 @@
             <div class="d-flex form-group mb-0"> 
             <!-- custom select -->
 
-                <div class="form-group">
-                    <input type="text" placeholder="Surface (m²)" class="form-control" formControlName="surface">
-                </div>
+                <!-- <div class="form-group">
+                    <input type="text" placeholder="Surface min (m²)" class="form-control" formControlName="surface">
+                </div> -->
             
-                <div class="input-group ml-3 form-group ">
+                <div class="input-group form-group ">
                     <label class="input-group-text" for="inputGroupSelect03">Prix :</label> 
                     <select class="custom-select form-control" id="inputGroupSelect03" formControlName="price">
                         <option value="{{element}}" *ngFor="let element of prices">{{element}}</option>

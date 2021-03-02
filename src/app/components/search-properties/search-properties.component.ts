@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { Property } from 'src/app/interfaces/property';
 import { PropertiesService } from 'src/app/services/properties.service';
+import {Location} from '@angular/common'; 
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-search-properties',
   templateUrl: './search-properties.component.html',
-  styleUrls: ['./search-properties.component.css']
+  styleUrls: ['./search-properties.component.css'],
+
 })
 export class SearchPropertiesComponent implements OnInit {
 
@@ -23,9 +27,15 @@ export class SearchPropertiesComponent implements OnInit {
     "plus de 500000"
   ];
 
+  valueSubject = new Subject<string>();
+  value: string;
+  valueX;
+
   constructor(
     private formBuilder: FormBuilder,
     private propertiesService: PropertiesService,
+    private location: Location,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -34,14 +44,14 @@ export class SearchPropertiesComponent implements OnInit {
     this.propertiesService.propertiesSubject.subscribe(
       (properties: Property[]) => {
         this.properties = properties
-  
+        
     this.getAllCategories()
     this.getAllCities()
     });
-    this.propertiesService.getProperties();
-    //console.log(this.categories)
-    //console.log(this.cities)
 
+
+    this.propertiesService.getProperties();
+    this.propertiesService.getPropertiesOrderBy();
   }
 
   initSearchPropertiesForm(){
@@ -49,7 +59,7 @@ export class SearchPropertiesComponent implements OnInit {
       city: ['', Validators.required],
       category: ['', Validators.required],
       price: ['', Validators.required],
-      surface: ['', Validators.required],
+
     });
   }
 
@@ -76,6 +86,34 @@ export class SearchPropertiesComponent implements OnInit {
   });
       return this.cities
   }
+
+  search: Property[] = [];
+
+  onSubmitSearchPropertiesForm(){
+    let city = this.searchPropertiesForm.get('city').value;
+    let category = this.searchPropertiesForm.get('category').value;
+    let price = this.searchPropertiesForm.get('price').value;
+
+    this.value = city + "_"+ category + "_" + price
+
+    //console.log(this.value)
+
+    this.properties.forEach(element => {
+      if (element.indexSearch == this.value){
+        this.search.push(element)
+      }
+    });
+  
+    if(!this.search.length){
+      console.log("vide")
+    } else {
+    //console.log(this.search)
+  }
+  this.propertiesService.recup(this.search)
+  this.propertiesService.emitSearchProperties()
+  this.router.navigate(['/home'])
+  }
+
 
 
 }

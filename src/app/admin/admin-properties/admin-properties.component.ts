@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Property } from 'src/app/interfaces/property';
 import { PropertiesService } from 'src/app/services/properties.service';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-admin-properties',
@@ -90,7 +94,7 @@ export class AdminPropertiesComponent implements OnInit {
     newProperty.sold = this.propertiesForm.get('sold').value ? this.propertiesForm.get('sold').value : false;
     newProperty.heart_stroke = this.propertiesForm.get('heart_stroke').value ? this.propertiesForm.get('heart_stroke').value : false;
     newProperty.photos = this.photosAdded ? this.photosAdded : [];
-    newProperty.indexSearch = this.propertiesForm.get('city').value + "_" + this.propertiesForm.get('category').value + "_" + this.ranking + "_" + this.propertiesForm.get('surface').value
+    newProperty.indexSearch = this.propertiesForm.get('city').value + "_" + this.propertiesForm.get('category').value + "_" + this.ranking
     if (this.editMode){
       this.propertiesService.updateProperty(newProperty, this.indextoUpdate);
     } else {

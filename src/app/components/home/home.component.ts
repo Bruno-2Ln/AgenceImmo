@@ -7,7 +7,7 @@ import { SearchPropertiesComponent } from '../search-properties/search-propertie
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [SearchPropertiesComponent]
+  providers: [SearchPropertiesComponent] 
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
@@ -37,21 +37,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       //   console.log('Observable complete!')
       // }
     )
-    // this.valueSubscription = this.searchPropertiesComponent.valueSubject.subscribe(
-    //   (data: any) => {
-    //     this.value = data;
-    //     console.log(this.value);
-    //     console.log("search");
-    //   }
-    // )
     this.propertiesService.getProperties();
-  
+
+  //souscription à l'observable implémenté dans le service mais appelé dans le component frère search, ceci n'est possible que par le fait de fournir le component frère ici (ligne 10 : providers: [SearchPropertiesComponent] ) 
     this.propertiesSearchSubcription = this.propertiesService.propertiesSearchSubject.subscribe(search => {
       this.search = search;
       console.log(this.search)
     });
-    // this.searchPropertiesComponent.onSubmitSearchPropertiesForm()
-    //this.propertiesService.emitProperties();
   }
   
   getSoldValue(index) {

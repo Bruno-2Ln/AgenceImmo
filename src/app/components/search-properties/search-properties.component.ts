@@ -11,13 +11,14 @@ import { Router } from '@angular/router';
   selector: 'app-search-properties',
   templateUrl: './search-properties.component.html',
   styleUrls: ['./search-properties.component.css'],
-
+  
 })
 export class SearchPropertiesComponent implements OnInit {
 
   searchPropertiesForm: FormGroup;
   properties: Property[] = [];
-  
+  search: Property[] = [];
+
   categories: string[] = [];
   cities: string[] = [];
   prices: string[] = [
@@ -26,10 +27,8 @@ export class SearchPropertiesComponent implements OnInit {
     "de 300001 à 500000",
     "plus de 500000"
   ];
-
-  valueSubject = new Subject<string>();
+  
   value: string;
-  valueX;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -87,23 +86,22 @@ export class SearchPropertiesComponent implements OnInit {
       return this.cities
   }
 
-  search: Property[] = [];
-
   onSubmitSearchPropertiesForm(){
+    //Récupération des données du formulaire..
     let city = this.searchPropertiesForm.get('city').value;
     let category = this.searchPropertiesForm.get('category').value;
     let price = this.searchPropertiesForm.get('price').value;
-
+    //pour concaténation dans la variable value
     this.value = city + "_"+ category + "_" + price
 
-    //console.log(this.value)
-
+    //recherche de l'existence de la value dans le tableau des propriétés
     this.properties.forEach(element => {
       if (element.indexSearch == this.value){
+        //la valeur similaire trouvée, l'objet est push dans le tableau search[]
         this.search.push(element)
       }
     });
-  
+    //si le tableau est vide
     if(!this.search.length){
       console.log("vide")
     } else {
@@ -113,7 +111,6 @@ export class SearchPropertiesComponent implements OnInit {
   this.propertiesService.emitSearchProperties()
   this.router.navigate(['/home'])
   }
-
 
 
 }

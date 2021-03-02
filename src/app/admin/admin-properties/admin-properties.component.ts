@@ -52,7 +52,6 @@ export class AdminPropertiesComponent implements OnInit {
       }
       );
       this.propertiesService.getProperties();
-      //this.propertiesService.emitProperties();
   }
 
   // Ouverture Modal

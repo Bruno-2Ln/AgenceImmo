@@ -16,6 +16,8 @@ export class PropertiesService {
   propertiesSubject = new Subject<Property[]>();
   propertiesHeartSubject = new Subject<Property[]>();
 
+  propertiesSearchSubject = new Subject<Property[]>();
+  value;
 
   constructor() {}
 
@@ -130,6 +132,14 @@ uploadFile(file: File){
     }
   }
 
+  //la fonction va permettre la communication entre les components frères search et home
+  recup(data){
+    this.value = data;
+    console.log(this.value)
+    //on emet dans l'observable les données pour que home les récupére par abonnement.
+    this.emitSearchProperties();
+  }
+
   //on emet les données à chaque modification de données.
   emitProperties() {
     this.propertiesSubject.next(this.properties);
@@ -139,17 +149,7 @@ uploadFile(file: File){
     this.propertiesHeartSubject.next(this.propertiesHeart);
   }
 
-  propertiesSearchSubject = new Subject<Property[]>();
-  value;
-
-  recup(data){
-    this.value = data;
-    console.log(this.value)
-    this.emitSearchProperties();
-  }
-
   emitSearchProperties() {
-    // this.propertiesSearchSubject.next(this.search);
     this.propertiesSearchSubject.next(this.value);
   }
 

@@ -1,9 +1,7 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
 import { Property } from 'src/app/interfaces/property';
 import { PropertiesService } from 'src/app/services/properties.service';
-import {Location} from '@angular/common'; 
 import { Router } from '@angular/router';
 
 
@@ -33,7 +31,6 @@ export class SearchPropertiesComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private propertiesService: PropertiesService,
-    private location: Location,
     private router: Router
   ) { }
 

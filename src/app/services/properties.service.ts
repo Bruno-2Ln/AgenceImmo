@@ -15,10 +15,7 @@ export class PropertiesService {
 
   propertiesSubject = new Subject<Property[]>();
   propertiesHeartSubject = new Subject<Property[]>();
-
-  propertiesSearchSubject = new Subject<Property[]>();
-  value;
-
+  
   constructor() {}
 
 createProperty(property: Property) {
@@ -54,6 +51,7 @@ getProperties() {
   firebase.database().ref('/properties').on('value', (data) => {
     this.properties = data.val() ? data.val() : [];
     this.emitProperties();
+    
   });
 }
 
@@ -61,8 +59,10 @@ getPropertiesOrderBy(){
   firebase.database().ref('/properties')
                       .orderByChild("price")
                       .on("child_added", snap => {
-                          //console.log(snap.val());
+                          this.properties.push(snap.val())
                       });
+                      this.emitProperties();
+                      console.log(this.properties);
 }
 
 getPropertiesByProprietyObject(propriety: string, value: string|boolean|number){
@@ -70,8 +70,7 @@ getPropertiesByProprietyObject(propriety: string, value: string|boolean|number){
   this.proprietiesAccess.orderByChild(propriety).equalTo(value).on("child_added", (snap) => {
     this.propertiesHeart = snap.val() ? snap.val() : [];
     this.emitPropertiesHeart();
-  }
-);
+  });
 }
 
 //Selectionne une propriété par sa référence
@@ -82,7 +81,7 @@ getSinglePropertyByRef(ref){
   this.proprietiesAccess.orderByChild("reference").equalTo(ref).on("child_added",
       (data) => {
         resolve(data.val());
-        console.log(data.val())
+        //console.log(data.val())
       },
       (error) => {
         console.error(error);
@@ -132,14 +131,6 @@ uploadFile(file: File){
     }
   }
 
-  //la fonction va permettre la communication entre les components frères search et home
-  recup(data){
-    this.value = data;
-    console.log(this.value)
-    //on emet dans l'observable les données pour que home les récupére par abonnement.
-    this.emitSearchProperties();
-  }
-
   //on emet les données à chaque modification de données.
   emitProperties() {
     this.propertiesSubject.next(this.properties);
@@ -147,10 +138,6 @@ uploadFile(file: File){
 
   emitPropertiesHeart() {
     this.propertiesHeartSubject.next(this.propertiesHeart);
-  }
-
-  emitSearchProperties() {
-    this.propertiesSearchSubject.next(this.value);
   }
 
   // getProperties() { //promesse

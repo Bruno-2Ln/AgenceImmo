@@ -1,6 +1,7 @@
 .typo {
     font-family : 'RocknRoll One', 'sans-serif';
-    color: rgb(100, 100, 100);
+    color: rgb(65, 65, 65);
+    font-size: 2rem;
 }
 
 #container-search-properties{

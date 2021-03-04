@@ -85,6 +85,7 @@ selectAgents(propriety: string, value: string){
     firebase.database().ref('/agents').on('value', (data) => {
       this.agents = data.val() ? data.val() : [];
       this.emitAgents();
+      console.log(this.agents)
     });
   }
 

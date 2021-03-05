@@ -10,8 +10,8 @@
             <h5 class="card-title">{{property.title}}{{property.i}}</h5>
             <h6 class="card-subtitle mt-1 text-muted pb-0">{{ property.city}}</h6>
         </div>
-        <div class="d-flex mb-3">
-            <div class="col-5 p-0">
+        <div class="d-flex mb-3 div-infos">
+            <div class="col-6 p-0 info">
                 <p class="mb-2 text-center">
                     <i class="fas fa-bed"></i>
                     <span *ngIf="property.bedrooms && property.bedrooms !== ''" class="ml-2">{{ property.bedrooms}}</span>
@@ -20,7 +20,7 @@
                     <span *ngIf="property.surface && property.surface !== ''">{{ property.surface}} m²</span>
                 </p>
             </div>
-            <div class="col-6">
+            <div class="col-6 info">
                 <p class="mb-2 text-center">
                     <i class="fas fa-bath"></i>
                     <span *ngIf="property.bathrooms && property.bathrooms !== ''" class="ml-2">{{ property.bathrooms}}</span>
@@ -31,8 +31,8 @@
             </div>
         </div>
         <div class="card-footer d-flex">
-            <h3>{{property.price}} €</h3>
-            <button class="ml-auto btn btn-primary" type="button" [routerLink]="['/property', property.reference]">
+            <h3 class="price">{{property.price}} €</h3>
+            <button class="ml-auto btn btn-primary btn-view" type="button" [routerLink]="['/property', property.reference]">
                 Voir ce bien
             </button>
         </div>

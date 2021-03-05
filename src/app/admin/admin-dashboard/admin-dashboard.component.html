@@ -1,13 +1,13 @@
 <div class="container">
-    <h1 class="display-4 pt-5 mb-0">tableau de bord</h1>
+    <h1 class="display-5 pt-5 mb-0 typo">tableau de bord</h1>
     <hr class="mt-0 mb-5 bg-dark">
 
     <ul ngbNav #nav="ngbNav" [(activeId)]="active" [destroyOnHide]="false" class="nav-tabs">
 
         <li [ngbNavItem]="1">
             <a ngbNavLink>
-                <div class="font-weight-light" class="options-dashboard">
-                    <i class="fas fa-home mr-2"></i> <span>Biens</span>
+                <div class="font-weight-light typo" class="options-dashboard">
+                    <i class="fas fa-home mr-2"></i> <span class="typo">Biens</span>
                 </div> 
             </a>
             <ng-template ngbNavContent>
@@ -21,8 +21,8 @@
 
         <li [ngbNavItem]="2" [destroyOnHide]="true">
             <a ngbNavLink>
-                <div class="font-weight-light" class="options-dashboard">
-                    <i class="fas fa-user-alt mr-2"></i> <span>Agents</span>
+                <div class="font-weight-light typo" class="options-dashboard">
+                    <i class="fas fa-user-alt mr-2"></i> <span class="typo">Agents</span>
                 </div> 
             </a>
                 <ng-template ngbNavContent>

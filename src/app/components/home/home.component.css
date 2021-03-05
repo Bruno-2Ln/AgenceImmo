@@ -1,0 +1,75 @@
+.titre{
+    font-family: 'RocknRoll One', 'sans-serif';
+    color: rgb(65, 65, 65);
+}
+
+.card{
+    width: 18rem;
+}
+
+.sous-card {
+    height: 14rem;
+}
+
+.property-title{
+    height: 3rem;
+}
+
+@media screen and (max-width: 766px){
+    .container-property {
+        display: flex;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .card{
+        width: 22rem;
+        display: flex;
+        margin: auto;
+    }
+    .sous-card {
+        height: 17rem;
+    }
+}
+
+@media screen and (max-width: 766px){
+    .titre {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 392px){
+    .titre {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-width: 436px){
+    .card{
+        width: 17rem;
+    }
+    .sous-card {
+        height: 13rem;
+    }
+}
+
+@media screen and (max-width: 328px){
+    .card{
+        width: 14rem;
+    }
+    .sous-card {
+        height: 10rem;
+    }
+}
+
+@media screen and (max-width: 292px){
+    .card{
+        width: 12.5rem;
+    }
+    .sous-card {
+        height: 9rem;
+    }
+    .property-title{
+        height: 5rem;
+    }
+}

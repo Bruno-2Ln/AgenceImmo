@@ -1,0 +1,39 @@
+@media screen and (max-width: 890px){
+    .price {
+        font-size: 1.5rem!important;
+    }
+    .btn-view {
+        width: 100px;
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 760px){
+    .card-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .card-body {
+        text-align: center;
+        height: 150px;
+        padding-bottom: 1%;
+    }
+    .info {
+        text-align: center;
+        padding: 0;
+    }
+    .div-infos{
+        padding: 0 10%;
+    }
+    .card{
+        margin-bottom: 5%;
+    }
+
+}
+
+@media screen and (max-width: 720px){
+    
+    .card-body {
+        height: 120px;
+    }
+}

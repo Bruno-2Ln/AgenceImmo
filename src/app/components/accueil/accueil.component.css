@@ -13,3 +13,33 @@
 .titre-section-2 {
     color: rgb(65, 65, 65);
 }
+
+@media screen and (max-width: 508px){
+    #app-search {
+        width: 75%!important;
+    }
+}
+
+@media screen and (max-width: 320px){
+    #app-search {
+        width: 85%!important;
+    }
+}
+
+@media screen and (max-width: 265px){
+    #app-search {
+        width: 90%!important;
+    }
+}
+
+@media screen and (max-width: 566px){
+    .titre-section-2 {
+        font-size: 1.5rem!important;
+    }
+}
+
+@media screen and (max-width: 490px){
+    .titre-section-2 {
+        font-size: 1.2rem!important;
+    }
+}

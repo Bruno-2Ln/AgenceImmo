@@ -11,3 +11,8 @@ textarea {
 .deletePhoto i {
     font-size: 20px;
 }
+
+.title{
+    font-family: 'RocknRoll One', 'sans-serif';
+    color: rgb(65, 65, 65);
+}

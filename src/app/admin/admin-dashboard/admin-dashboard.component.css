@@ -1,11 +1,11 @@
 .options-dashboard i{
     font-size: 50px;
-    color: #1b1b1b;
+    color: rgb(65, 65, 65);
 }
 
 .options-dashboard span{
     font-size: 22px;
-    color: #1b1b1b;
+    color: rgb(65, 65, 65);
 }
 
 .options-dashboard {
@@ -14,4 +14,9 @@
 
 .visibility {
     color: red;
+}
+
+.typo {
+    font-family: 'RocknRoll One', 'sans-serif';
+    color: rgb(65, 65, 65);
 }

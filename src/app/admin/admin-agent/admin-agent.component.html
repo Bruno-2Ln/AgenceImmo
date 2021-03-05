@@ -2,30 +2,29 @@
     <div class="row">
         <div class="col-12 d-flex">
             <h2 class="font-weight-light title">Agents Immobiliers</h2>
-            <button class="btn btn-primary ml-auto" type="button" (click)="open(agentFormModal);resetForm()"><i class="fas fa-plus"></i> Ajouter un agent</button>
+            <button class="btn btn-primary ml-auto" type="button" (click)="open(agentFormModal);resetForm()"><i class="fas fa-plus"></i><span class="ml-1 text-button">Ajouter un agent</span> </button>
         </div>
     </div>
 
     <hr class="mt-1 mb-5 bg-dark">
-    <div class="row">
+    <div class="row d-flex">
         <div *ngFor="let agent of agents; let i = index" class="col-12 shadow-sm p-4 mb-3 bg-light">
             <div class="row">
-                <div class="col-3 container-fluid">
-                    <div class="text-center" *ngIf="agent.photo">
+                <div class="w-50 d-flex">
+                    <div class="text-center div-photo" *ngIf="agent.photo">
                         <img [src]="agent.photo" class="w-50" alt="Photo de l'agent immobilier">
                     </div>
                 </div>
-                <div class="col-9">
-                    <div class="d-flex w-25 justify-content-center mb-2">
-                        <h3 class="font-weight-normal mb-0">
+                <div class="w-50 div-infos">
+                    <div class="d-flex w-100 justify-content-center mb-2">
+                        <h3 class="font-weight-normal name-agent mb-0 w-100">
                             {{agent.firstname}} {{agent.lastname}}
                         </h3>
                     </div>
-                    <div class="w-25 text-center mb-4">
-                        <div class="mb-2"></div>
-                        <h5 class="font-weight-normal mb-4 text-muted">{{agent.phone}}</h5>
+                    <div class="phone w-100 mb-4">
+                        <h5 class="font-weight-normal mb-4 text-muted text-left w-100">{{agent.phone}}</h5>
                     </div>
-                    <div class="text-center w-25">
+                    <div class="text-left w-100">
                         <button type="button" class="btn btn-primary m-1" title="modifier le profil de l'agent" (click)="onEditAgent(agent,agentFormModal)"> <i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-danger m-1" title="effacer le profil de l'agent" (click)="recupIndex(i);open(confirmDeleteAgent)"><i class="fas fa-trash-alt"></i></button>
                     </div>

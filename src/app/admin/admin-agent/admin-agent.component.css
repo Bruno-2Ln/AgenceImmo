@@ -2,3 +2,40 @@
     font-family: 'RocknRoll One', 'sans-serif';
     color: rgb(65, 65, 65);
 }
+
+@media screen and (max-width: 1200px){
+    .title, .title-property {
+        font-size: 1.2rem;
+    }
+    .text-button {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 577px){
+    .title, .title-property {
+        font-size: 1.2rem;
+    }
+    .text-button {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .div-photo {
+        display : none;
+    }
+    .div-infos {
+        width: 100%!important;
+        font-size: 1.2rem;
+    }
+    .phone {
+        margin: 1%!important;
+    }
+}
+
+@media screen and (max-width: 282px){
+    .name-agent {
+        font-size: 1.2rem;
+    }
+}

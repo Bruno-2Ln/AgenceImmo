@@ -16,3 +16,40 @@ textarea {
     font-family: 'RocknRoll One', 'sans-serif';
     color: rgb(65, 65, 65);
 }
+
+@media screen and (max-width: 990px){
+    .container-property {
+        display: flex;
+        flex-direction: column;
+    }
+    .div-info {
+        display: flex;
+        margin: 0 auto;
+        width: 75%!important;
+    }
+    .property-option {
+        flex-direction: column;
+        padding-left: 0!important;
+    }
+    .title-property {
+        margin-top: 2%;
+    }
+}
+
+@media screen and (max-width: 577px){
+    .title, .title-property {
+        font-size: 1.2rem;
+    }
+    .text-button {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 416px){
+    .infos-none {
+        display: none;
+    }
+    .padding-none {
+        padding: 0!important;
+    }
+}

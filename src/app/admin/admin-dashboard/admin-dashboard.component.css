@@ -20,3 +20,13 @@
     font-family: 'RocknRoll One', 'sans-serif';
     color: rgb(65, 65, 65);
 }
+
+
+@media screen and (max-width: 365px){
+    .options-dashboard i{
+        font-size: 30px;
+    }
+    .options-dashboard span{
+        font-size: 15px;
+    }
+}

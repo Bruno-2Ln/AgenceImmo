@@ -1,0 +1,9 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": "auth != null",
+    "$uid": {
+            ".indexOn": ["reference","heart_stroke"]
+        }
+  }
+}

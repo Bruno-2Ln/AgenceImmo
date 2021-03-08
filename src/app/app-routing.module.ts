@@ -13,8 +13,8 @@ const routes: Routes = [
   { path: "admin/dashboard", canActivate: [AuthGuardService], component: AdminDashboardComponent },
   { path: "login290818052511", component: SigninComponent},
   { path: 'property/:ref', component: SinglePropertyComponent},
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
-  { path: '**', redirectTo: 'home'},
+  { path: '', redirectTo: 'accueil', pathMatch: 'full'},
+  { path: '**', redirectTo: 'accueil'},
 ];
 
 @NgModule({

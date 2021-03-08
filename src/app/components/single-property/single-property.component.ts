@@ -26,8 +26,6 @@ export class SinglePropertyComponent implements OnInit {
   ngOnInit(): void {
     const ref = +this.route.snapshot.paramMap.get('ref');
 
-    //const id = this.route.snapshot.params['ref'];
-
     this.propertiesService.getSinglePropertyByRef(ref).then(
       (property: Property) => {
         this.property = property;

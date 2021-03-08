@@ -172,8 +172,8 @@ export class AdminPropertiesComponent implements OnInit {
         setTimeout(() => {
           this.photoUploaded = false
         }, 5000)
-      });
-   // this.propertiesService.uploadFile()
+      }
+    );
   }
 
   onRemoveAddedPhoto(index) {

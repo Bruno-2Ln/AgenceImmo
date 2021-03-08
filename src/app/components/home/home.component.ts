@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.propertiesSubcription = this.propertiesService.propertiesSubject.subscribe(
       (data: any) => {
         this.properties = data;
-        //console.log(this.properties);
       }
       //Cette partie n'est nécessaire que pour gérer l'observable sans emit.
       // ,
@@ -51,7 +50,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.propertiesSubcription.unsubscribe();
-
   }
 
 }

@@ -81,7 +81,6 @@ getSinglePropertyByRef(ref){
   this.proprietiesAccess.orderByChild("reference").equalTo(ref).on("child_added",
       (data) => {
         resolve(data.val());
-        //console.log(data.val())
       },
       (error) => {
         console.error(error);

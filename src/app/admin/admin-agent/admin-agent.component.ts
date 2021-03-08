@@ -47,9 +47,6 @@ export class AdminAgentComponent implements OnInit {
     this.agentsService.getAgents();
     this.agentsService.emitAgents();
 
-    // this.agentsService.selectAllAgents();
-    // this.agentsService.selectByNames();
-    // this.agentsService.selectObjectAfterName();
     this.agentsService.selectAgents("firstname","Angus");
   }
 

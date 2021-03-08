@@ -15,6 +15,7 @@ import { AdminAgentComponent } from './admin/admin-agent/admin-agent.component';
 import { AccueilComponent } from './components/accueil/accueil.component';
 import { HeartStrokePropertyComponent } from './heart-stroke-property/heart-stroke-property.component';
 import { SearchPropertiesComponent } from './components/search-properties/search-properties.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SearchPropertiesComponent } from './components/search-properties/search
     AdminAgentComponent,
     AccueilComponent,
     HeartStrokePropertyComponent,
-    SearchPropertiesComponent
+    SearchPropertiesComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
